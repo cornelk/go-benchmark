@@ -1,9 +1,22 @@
 package benchmark
 
-func generateIntSlice() [128]int {
-	var m [128]int
-	for i := 0; i < 128; i++ {
+import (
+	"testing"
+)
+
+const BenchMarkSize = 512
+
+func generateIntSlice(b *testing.B) [BenchMarkSize]int {
+	var m [BenchMarkSize]int
+	for i := 0; i < BenchMarkSize; i++ {
 		m[i] = i
 	}
+	b.ResetTimer()
 	return m
+}
+
+func checkItem(b *testing.B, index, item int) {
+	if item != index {
+		b.Fail()
+	}
 }

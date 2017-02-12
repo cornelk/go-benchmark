@@ -5,66 +5,50 @@ import (
 )
 
 func BenchmarkSliceReadRange(b *testing.B) {
-	m := generateIntSlice()
-	b.ResetTimer()
-
+	m := generateIntSlice(b)
 	b.RunParallel(func(pb *testing.PB) {
 		for pb.Next() {
 			for i, e := range m {
-				if e != i {
-					b.Fail()
-				}
+				checkItem(b, i, e)
 			}
 		}
 	})
 }
 
 func BenchmarkSliceReadForward(b *testing.B) {
-	m := generateIntSlice()
-	b.ResetTimer()
-
+	m := generateIntSlice(b)
 	b.RunParallel(func(pb *testing.PB) {
 		for pb.Next() {
-			for i := 0; i < 128; i++ {
+			for i := 0; i < BenchMarkSize; i++ {
 				e := m[i]
-				if e != i {
-					b.Fail()
-				}
+				checkItem(b, i, e)
 			}
 		}
 	})
 }
 
 func BenchmarkSliceReadBackwards(b *testing.B) {
-	m := generateIntSlice()
-	b.ResetTimer()
-
+	m := generateIntSlice(b)
 	b.RunParallel(func(pb *testing.PB) {
 		for pb.Next() {
-			for i := 127; i >= 0; i-- {
+			for i := BenchMarkSize - 1; i >= 0; i-- {
 				e := m[i]
-				if e != i {
-					b.Fail()
-				}
+				checkItem(b, i, e)
 			}
 		}
 	})
 }
 
 func BenchmarkSliceReadLastItemFirst(b *testing.B) {
-	m := generateIntSlice()
-	b.ResetTimer()
-
+	m := generateIntSlice(b)
 	b.RunParallel(func(pb *testing.PB) {
 		for pb.Next() {
-			if m[127] != 127 {
+			if m[BenchMarkSize-1] != BenchMarkSize-1 {
 				b.Fail()
 			}
-			for i := 0; i < 128; i++ {
+			for i := 0; i < BenchMarkSize; i++ {
 				e := m[i]
-				if e != i {
-					b.Fail()
-				}
+				checkItem(b, i, e)
 			}
 		}
 	})
