@@ -4,8 +4,22 @@ import (
 	"testing"
 )
 
+func BenchmarkSliceReadRange(b *testing.B) {
+	m := generateIntSlice()
+	b.ResetTimer()
+
+	b.RunParallel(func(pb *testing.PB) {
+		for pb.Next() {
+			for i, e := range m {
+				if e != i {
+					b.Fail()
+				}
+			}
+		}
+	})
+}
+
 func BenchmarkSliceReadForward(b *testing.B) {
-	b.ReportAllocs()
 	m := generateIntSlice()
 	b.ResetTimer()
 
@@ -22,7 +36,6 @@ func BenchmarkSliceReadForward(b *testing.B) {
 }
 
 func BenchmarkSliceReadBackwards(b *testing.B) {
-	b.ReportAllocs()
 	m := generateIntSlice()
 	b.ResetTimer()
 
@@ -39,7 +52,6 @@ func BenchmarkSliceReadBackwards(b *testing.B) {
 }
 
 func BenchmarkSliceReadLastItemFirst(b *testing.B) {
-	b.ReportAllocs()
 	m := generateIntSlice()
 	b.ResetTimer()
 
