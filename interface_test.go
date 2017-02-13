@@ -14,17 +14,15 @@ func BenchmarkValueUnsafePointer(b *testing.B) {
 	}
 	b.ResetTimer()
 
-	b.RunParallel(func(pb *testing.PB) {
-		for pb.Next() {
-			for i := 0; i < BenchMarkSize; i++ {
-				item := m[i]
-				e := *(*int)(item)
-				if e != i {
-					b.Fail()
-				}
+	for n := 0; n < b.N; n++ {
+		for i := 0; i < BenchMarkSize; i++ {
+			item := m[i]
+			e := *(*int)(item)
+			if e != i {
+				b.Fail()
 			}
 		}
-	})
+	}
 }
 
 // benchmark the use of interface{} to store data
@@ -37,14 +35,12 @@ func BenchmarkValueInterface(b *testing.B) {
 	}
 	b.ResetTimer()
 
-	b.RunParallel(func(pb *testing.PB) {
-		for pb.Next() {
-			for i := 0; i < BenchMarkSize; i++ {
-				e := m[i]
-				if e != i {
-					b.Fail()
-				}
+	for n := 0; n < b.N; n++ {
+		for i := 0; i < BenchMarkSize; i++ {
+			e := m[i]
+			if e != i {
+				b.Fail()
 			}
 		}
-	})
+	}
 }
