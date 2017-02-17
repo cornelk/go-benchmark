@@ -29,9 +29,7 @@ func BenchmarkValueUnsafePointer(b *testing.B) {
 func BenchmarkValueInterface(b *testing.B) {
 	var m [BenchMarkSize]interface{}
 	for i := 0; i < BenchMarkSize; i++ {
-		var e interface{}
-		e = i
-		m[i] = e
+		m[i] = i
 	}
 	b.ResetTimer()
 

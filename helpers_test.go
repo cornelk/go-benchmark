@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-const BenchMarkSize = 512
+const BenchMarkSize = 1 << 10 // 1024
 
 func generateIntSlice(b *testing.B) [BenchMarkSize]int {
 	var m [BenchMarkSize]int
