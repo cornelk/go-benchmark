@@ -31,6 +31,13 @@ BenchmarkParameterSlicePassedByValue-8     	    5000	    289891 ns/op
 BenchmarkParameterSlicePassedByPointer-8   	  500000	      3343 ns/op
 ```
 
+## Using reflect vs cast
+
+```
+BenchmarkReflect-8                         	  300000	      4279 ns/op
+BenchmarkCast-8                            	 1000000	      1663 ns/op
+```
+
 ## Hashing algorithms that produce a 64 bit hash of a short input
 
 ```
