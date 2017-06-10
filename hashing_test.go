@@ -7,6 +7,7 @@ import (
 	"hash"
 	"testing"
 
+	"github.com/cespare/xxhash"
 	"github.com/dchest/siphash"
 	blake2bsimd "github.com/minio/blake2b-simd"
 	"github.com/spaolacci/murmur3"
@@ -112,4 +113,7 @@ func BenchmarkComparisonMurmur3(b *testing.B) {
 }
 func BenchmarkComparisonSipHash(b *testing.B) {
 	benchmarkHashKey64(b, siphash.New, hashBufferSize)
+}
+func BenchmarkComparisonXXHash(b *testing.B) {
+	benchmarkHash64(b, xxhash.New, hashBufferSize)
 }
