@@ -3,6 +3,12 @@
 	"ignore": "test",
 	"package": [
 		{
+			"checksumSHA1": "hL94rlMo3/zZHYhiGmRBDTHopvQ=",
+			"path": "github.com/cespare/xxhash",
+			"revision": "1b6d2e40c16ba0dfce5c8eac2480ad6e7394819b",
+			"revisionTime": "2017-06-04T09:40:20Z"
+		},
+		{
 			"checksumSHA1": "xqVDKHGnakGlcRhmWd1j9JYmfLc=",
 			"path": "github.com/dchest/siphash",
 			"revision": "4ebf1de738443ea7f45f02dc394c4df1942a126d",
