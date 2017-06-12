@@ -10,8 +10,10 @@ import (
 	"github.com/cespare/xxhash"
 	"github.com/dchest/siphash"
 	blake2bsimd "github.com/minio/blake2b-simd"
+	xxhash32pier "github.com/pierrec/xxHash/xxHash32"
+	xxhash64pier "github.com/pierrec/xxHash/xxHash64"
 	"github.com/spaolacci/murmur3"
-	xxhash32 "github.com/vova616/xxhash"
+	xxhash32vova "github.com/vova616/xxhash"
 	"golang.org/x/crypto/blake2b"
 	"golang.org/x/crypto/ripemd160"
 	"golang.org/x/crypto/sha3"
@@ -36,7 +38,6 @@ func benchmarkHash(b *testing.B, hash func() hash.Hash, length int64) {
 func benchmarkHash64(b *testing.B, hash func() hash.Hash64, length int64) {
 	data := make([]byte, length)
 	b.SetBytes(length)
-
 	for i := 0; i < b.N; i++ {
 		h := hash()
 		_, err := h.Write(data[:])
@@ -46,10 +47,9 @@ func benchmarkHash64(b *testing.B, hash func() hash.Hash64, length int64) {
 		h.Sum(nil)
 	}
 }
-func benchmarkHash32(b *testing.B, hash func(uint32) hash.Hash32, length int64) {
+func benchmarkHash64seed(b *testing.B, hash func(uint64) hash.Hash64, length int64) {
 	data := make([]byte, length)
 	b.SetBytes(length)
-
 	for i := 0; i < b.N; i++ {
 		h := hash(1471)
 		_, err := h.Write(data[:])
@@ -57,6 +57,56 @@ func benchmarkHash32(b *testing.B, hash func(uint32) hash.Hash32, length int64) 
 			panic(err)
 		}
 		h.Sum(nil)
+	}
+}
+func benchmarkHash32seed(b *testing.B, hash func(uint32) hash.Hash32, length int64) {
+	data := make([]byte, length)
+	b.SetBytes(length)
+	for i := 0; i < b.N; i++ {
+		h := hash(1471)
+		_, err := h.Write(data[:])
+		if err != nil {
+			panic(err)
+		}
+		h.Sum(nil)
+	}
+}
+func benchmarkHash64to32(b *testing.B, hash func() hash.Hash64, length int64) {
+	data := make([]byte, length)
+	b.SetBytes(length)
+	for i := 0; i < b.N; i++ {
+		h := hash()
+		_, err := h.Write(data[:])
+		if err != nil {
+			panic(err)
+		}
+		var b []byte
+		s := h.Sum64()
+		_ = append(
+			b,
+			byte(s>>56),
+			byte(s>>48),
+			byte(s>>40),
+			byte(s>>32),
+		)
+	}
+}
+func benchmarkHash64to16(b *testing.B, hash func() hash.Hash64, length int64) {
+	data := make([]byte, length)
+	b.SetBytes(length)
+	for i := 0; i < b.N; i++ {
+		h := hash()
+		_, err := h.Write(data[:])
+		if err != nil {
+			panic(err)
+		}
+		var b []byte
+		s := h.Sum64()
+		_ = append(
+			b,
+			byte(s>>56),
+			byte(s>>48),
+		)
 	}
 }
 
@@ -145,6 +195,18 @@ func BenchmarkComparisonSipHash(b *testing.B) {
 func BenchmarkComparisonXXHash64(b *testing.B) {
 	benchmarkHash64(b, xxhash.New, hashBufferSize)
 }
-func BenchmarkComparisonXXHash32(b *testing.B) {
-	benchmarkHash32(b, xxhash32.New, hashBufferSize)
+func BenchmarkComparisonXXHash32vova(b *testing.B) {
+	benchmarkHash32seed(b, xxhash32vova.New, hashBufferSize)
+}
+func BenchmarkComparisonXXHash32pier(b *testing.B) {
+	benchmarkHash32seed(b, xxhash32pier.New, hashBufferSize)
+}
+func BenchmarkComparisonXXHash64pier(b *testing.B) {
+	benchmarkHash64seed(b, xxhash64pier.New, hashBufferSize)
+}
+func BenchmarkComparisonXXHash64to32(b *testing.B) {
+	benchmarkHash64to32(b, xxhash.New, hashBufferSize)
+}
+func BenchmarkComparisonXXHash64to16(b *testing.B) {
+	benchmarkHash64to16(b, xxhash.New, hashBufferSize)
 }
