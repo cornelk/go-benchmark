@@ -11,6 +11,7 @@ import (
 	"github.com/dchest/siphash"
 	blake2bsimd "github.com/minio/blake2b-simd"
 	"github.com/spaolacci/murmur3"
+	xxhash32 "github.com/vova616/xxhash"
 	"golang.org/x/crypto/blake2b"
 	"golang.org/x/crypto/ripemd160"
 	"golang.org/x/crypto/sha3"
@@ -45,6 +46,19 @@ func benchmarkHash64(b *testing.B, hash func() hash.Hash64, length int64) {
 		h.Sum(nil)
 	}
 }
+func benchmarkHash32(b *testing.B, hash func(uint32) hash.Hash32, length int64) {
+	data := make([]byte, length)
+	b.SetBytes(length)
+
+	for i := 0; i < b.N; i++ {
+		h := hash(1471)
+		_, err := h.Write(data[:])
+		if err != nil {
+			panic(err)
+		}
+		h.Sum(nil)
+	}
+}
 
 func benchmarkHashKeyError(b *testing.B, hash func([]byte) (hash.Hash, error), length int64) {
 	data := make([]byte, length)
@@ -65,6 +79,20 @@ func benchmarkHashKey64(b *testing.B, hash func([]byte) hash.Hash64, length int6
 	data := make([]byte, length)
 	b.SetBytes(length)
 	key := make([]byte, 16)
+
+	for i := 0; i < b.N; i++ {
+		h := hash(key)
+		_, err := h.Write(data[:])
+		if err != nil {
+			panic(err)
+		}
+		h.Sum(nil)
+	}
+}
+func benchmarkHashKey32(b *testing.B, hash func([]byte) hash.Hash32, length int64) {
+	data := make([]byte, length)
+	b.SetBytes(length)
+	key := make([]byte, 8)
 
 	for i := 0; i < b.N; i++ {
 		h := hash(key)
@@ -114,6 +142,9 @@ func BenchmarkComparisonMurmur3(b *testing.B) {
 func BenchmarkComparisonSipHash(b *testing.B) {
 	benchmarkHashKey64(b, siphash.New, hashBufferSize)
 }
-func BenchmarkComparisonXXHash(b *testing.B) {
+func BenchmarkComparisonXXHash64(b *testing.B) {
 	benchmarkHash64(b, xxhash.New, hashBufferSize)
+}
+func BenchmarkComparisonXXHash32(b *testing.B) {
+	benchmarkHash32(b, xxhash32.New, hashBufferSize)
 }
