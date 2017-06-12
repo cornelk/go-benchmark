@@ -109,6 +109,19 @@ func benchmarkHash64to16(b *testing.B, hash func() hash.Hash64, length int64) {
 		)
 	}
 }
+func benchmarkHash64to8(b *testing.B, hash func() hash.Hash64, length int64) {
+	data := make([]byte, length)
+	b.SetBytes(length)
+	for i := 0; i < b.N; i++ {
+		h := hash()
+		_, err := h.Write(data[:])
+		if err != nil {
+			panic(err)
+		}
+		s := h.Sum64()
+		_ = byte(s >> 56)
+	}
+}
 
 func benchmarkHashKeyError(b *testing.B, hash func([]byte) (hash.Hash, error), length int64) {
 	data := make([]byte, length)
@@ -209,4 +222,7 @@ func BenchmarkComparisonXXHash64to32(b *testing.B) {
 }
 func BenchmarkComparisonXXHash64to16(b *testing.B) {
 	benchmarkHash64to16(b, xxhash.New, hashBufferSize)
+}
+func BenchmarkComparisonXXHash64to8(b *testing.B) {
+	benchmarkHash64to8(b, xxhash.New, hashBufferSize)
 }
