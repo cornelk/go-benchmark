@@ -27,6 +27,12 @@
 			"revisionTime": "2015-08-29T17:28:44Z"
 		},
 		{
+			"checksumSHA1": "tsuv2oy9wMYxdV5YtgIHONPUiv0=",
+			"path": "github.com/vova616/xxhash",
+			"revision": "f0a9a8b74d487f9563a527daf3bd6b4fbd3f5d00",
+			"revisionTime": "2013-03-13T23:02:33Z"
+		},
+		{
 			"checksumSHA1": "c1e6HeeiAnAfOyw55rQOfe162VE=",
 			"path": "golang.org/x/crypto/blake2b",
 			"revision": "453249f01cfeb54c3d549ddb75ff152ca243f9d8",
