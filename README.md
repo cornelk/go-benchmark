@@ -57,7 +57,7 @@ BenchmarkComparisonXXHash-8                	200000000	        89 ns/op	  89.28 M
 ## Filling a slice by index or append
 
 ```
-BenchmarkSliceFillByIndex-4         	 2000000	       627 ns/op
-BenchmarkSliceFillByIndexMake-4     	 2000000	       631 ns/op
-BenchmarkSliceFillMakeAppend-4      	 2000000	       902 ns/op
+BenchmarkSliceFillByIndex-4         	 3000000	       542 ns/op
+BenchmarkSliceFillByIndexMake-4     	 2000000	       901 ns/op
+BenchmarkSliceFillMakeAppend-4      	 1000000	      1309 ns/op
 ```
