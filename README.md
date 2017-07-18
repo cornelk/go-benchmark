@@ -1,5 +1,5 @@
 # go-benchmark
-Golang benchmarks used for optimizing code. The benchmarks were run with Golang 1.8 on MacOS.
+Golang benchmarks used for optimizing code. The benchmarks were run with Golang 1.8.3 on MacOS.
 
 ## interface{} vs [unsafe.Pointer](https://golang.org/pkg/unsafe/#Pointer) 
 
@@ -41,14 +41,23 @@ BenchmarkCast-8                            	 1000000	      1663 ns/op
 ## Hashing algorithms that produce a 64 bit hash of a short input
 
 ```
-BenchmarkComparisonMD5-8                   	 5000000	       263 ns/op	  30.37 MB/s
-BenchmarkComparisonSHA1-8                  	 5000000	       321 ns/op	  24.86 MB/s
-BenchmarkComparisonSHA256-8                	 3000000	       569 ns/op	  14.04 MB/s
-BenchmarkComparisonSHA3B224-8              	 1000000	      1245 ns/op	   6.42 MB/s
-BenchmarkComparisonSHA3B256-8              	 1000000	      1262 ns/op	   6.33 MB/s
-BenchmarkComparisonRIPEMD160-8             	 2000000	       997 ns/op	   8.02 MB/s
-BenchmarkComparisonBlake2B-8               	 2000000	       632 ns/op	  12.64 MB/s
-BenchmarkComparisonBlake2BSimd-8           	 3000000	       535 ns/op	  14.93 MB/s
-BenchmarkComparisonMurmur3-8               	10000000	       139 ns/op	  57.23 MB/s
-BenchmarkComparisonSipHash-8               	20000000	       126 ns/op	  63.40 MB/s
+BenchmarkComparisonMD5-8                   	50000000	       262 ns/op	  30.42 MB/s
+BenchmarkComparisonSHA1-8                  	50000000	       320 ns/op	  24.99 MB/s
+BenchmarkComparisonSHA256-8                	30000000	       578 ns/op	  13.82 MB/s
+BenchmarkComparisonSHA3B224-8              	10000000	      1226 ns/op	   6.52 MB/s
+BenchmarkComparisonSHA3B256-8              	10000000	      1218 ns/op	   6.57 MB/s
+BenchmarkComparisonRIPEMD160-8             	20000000	      1029 ns/op	   7.77 MB/s
+BenchmarkComparisonBlake2B-8               	20000000	       615 ns/op	  12.99 MB/s
+BenchmarkComparisonBlake2BSimd-8           	30000000	       539 ns/op	  14.82 MB/s
+BenchmarkComparisonMurmur3-8               	100000000	       136 ns/op	  58.69 MB/s
+BenchmarkComparisonSipHash-8               	100000000	       125 ns/op	  63.70 MB/s
+BenchmarkComparisonXXHash-8                	200000000	        89 ns/op	  89.28 MB/s
+```
+
+## Filling a slice by index or append
+
+```
+BenchmarkSliceFillByIndex-8       	 2000000	       623 ns/op
+BenchmarkSliceFillByIndexMake-8   	 2000000	       626 ns/op
+BenchmarkSliceFillAppend-8        	 1000000	      1304 ns/op
 ```

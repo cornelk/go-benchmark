@@ -45,3 +45,30 @@ func BenchmarkSliceReadLastItemFirst(b *testing.B) {
 		}
 	}
 }
+
+func BenchmarkSliceFillByIndex(b *testing.B) {
+	for n := 0; n < b.N; n++ {
+		var m [BenchMarkSize]int
+		for i := 0; i < BenchMarkSize; i++ {
+			m[i] = i
+		}
+	}
+}
+
+func BenchmarkSliceFillByIndexMake(b *testing.B) {
+	for n := 0; n < b.N; n++ {
+		m := make([]int, BenchMarkSize)
+		for i := 0; i < BenchMarkSize; i++ {
+			m[i] = i
+		}
+	}
+}
+
+func BenchmarkSliceFillMakeAppend(b *testing.B) {
+	for n := 0; n < b.N; n++ {
+		m := make([]int, 0, BenchMarkSize)
+		for i := 0; i < BenchMarkSize; i++ {
+			m = append(m, i)
+		}
+	}
+}
