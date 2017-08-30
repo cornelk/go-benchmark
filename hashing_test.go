@@ -167,62 +167,62 @@ func benchmarkHashKey32(b *testing.B, hash func([]byte) hash.Hash32, length int6
 	}
 }
 
-func BenchmarkComparisonMD5(b *testing.B) {
+func BenchmarkHashingMD5(b *testing.B) {
 	benchmarkHash(b, md5.New, hashBufferSize)
 }
 
-func BenchmarkComparisonSHA1(b *testing.B) {
+func BenchmarkHashingSHA1(b *testing.B) {
 	benchmarkHash(b, sha1.New, hashBufferSize)
 }
 
-func BenchmarkComparisonSHA256(b *testing.B) {
+func BenchmarkHashingSHA256(b *testing.B) {
 	benchmarkHash(b, sha256.New, hashBufferSize)
 }
 
-func BenchmarkComparisonSHA3B224(b *testing.B) {
+func BenchmarkHashingSHA3B224(b *testing.B) {
 	benchmarkHash(b, sha3.New224, hashBufferSize)
 }
 
-func BenchmarkComparisonSHA3B256(b *testing.B) {
+func BenchmarkHashingSHA3B256(b *testing.B) {
 	benchmarkHash(b, sha3.New256, hashBufferSize)
 }
 
-func BenchmarkComparisonRIPEMD160(b *testing.B) {
+func BenchmarkHashingRIPEMD160(b *testing.B) {
 	benchmarkHash(b, ripemd160.New, hashBufferSize)
 }
 
-func BenchmarkComparisonBlake2B(b *testing.B) {
+func BenchmarkHashingBlake2B(b *testing.B) {
 	benchmarkHashKeyError(b, blake2b.New256, hashBufferSize)
 }
 
-func BenchmarkComparisonBlake2BSimd(b *testing.B) {
+func BenchmarkHashingBlake2BSimd(b *testing.B) {
 	benchmarkHash(b, blake2bsimd.New256, hashBufferSize)
 }
 
-func BenchmarkComparisonMurmur3(b *testing.B) {
+func BenchmarkHashingMurmur3(b *testing.B) {
 	benchmarkHash64(b, murmur3.New64, hashBufferSize)
 }
-func BenchmarkComparisonSipHash(b *testing.B) {
+func BenchmarkHashingSipHash(b *testing.B) {
 	benchmarkHashKey64(b, siphash.New, hashBufferSize)
 }
-func BenchmarkComparisonXXHash64(b *testing.B) {
+func BenchmarkHashingXXHash64(b *testing.B) {
 	benchmarkHash64(b, xxhash.New, hashBufferSize)
 }
-func BenchmarkComparisonXXHash32vova(b *testing.B) {
+func BenchmarkHashingXXHash32vova(b *testing.B) {
 	benchmarkHash32seed(b, xxhash32vova.New, hashBufferSize)
 }
-func BenchmarkComparisonXXHash32pier(b *testing.B) {
+func BenchmarkHashingXXHash32pier(b *testing.B) {
 	benchmarkHash32seed(b, xxhash32pier.New, hashBufferSize)
 }
-func BenchmarkComparisonXXHash64pier(b *testing.B) {
+func BenchmarkHashingXXHash64pier(b *testing.B) {
 	benchmarkHash64seed(b, xxhash64pier.New, hashBufferSize)
 }
-func BenchmarkComparisonXXHash64to32(b *testing.B) {
+func BenchmarkHashingXXHash64to32(b *testing.B) {
 	benchmarkHash64to32(b, xxhash.New, hashBufferSize)
 }
-func BenchmarkComparisonXXHash64to16(b *testing.B) {
+func BenchmarkHashingXXHash64to16(b *testing.B) {
 	benchmarkHash64to16(b, xxhash.New, hashBufferSize)
 }
-func BenchmarkComparisonXXHash64to8(b *testing.B) {
+func BenchmarkHashingXXHash64to8(b *testing.B) {
 	benchmarkHash64to8(b, xxhash.New, hashBufferSize)
 }
