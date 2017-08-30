@@ -44,8 +44,8 @@ BenchmarkCast-8                            	 1000000	      1674 ns/op
 BenchmarkHashingMD5-8                      	30000000	       247 ns/op	  32.29 MB/s
 BenchmarkHashingSHA1-8           	       	20000000	       297 ns/op	  26.93 MB/s
 BenchmarkHashingSHA256-8         	       	20000000	       546 ns/op	  14.65 MB/s
-BenchmarkHashingSHA3B224-8              	    10000000	      1164 ns/op	   6.87 MB/s
-BenchmarkHashingSHA3B256-8              	    10000000	      1177 ns/op	   6.79 MB/s
+BenchmarkHashingSHA3B224-8         	       	10000000	      1164 ns/op	   6.87 MB/s
+BenchmarkHashingSHA3B256-8         	       	10000000	      1177 ns/op	   6.79 MB/s
 BenchmarkHashingRIPEMD160-8      	       	10000000	      1014 ns/op	   7.88 MB/s
 BenchmarkHashingBlake2B-8        	       	10000000	       589 ns/op	  13.57 MB/s
 BenchmarkHashingBlake2BSimd-8    	       	20000000	       524 ns/op	  15.24 MB/s
