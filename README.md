@@ -1,5 +1,6 @@
 # go-benchmark
-Golang benchmarks used for optimizing code. The benchmarks were run with Golang 1.9 on MacOS.
+
+Golang benchmarks used for optimizing code. The benchmarks were run with Golang 1.9 and 64 bit on MacOS.
 
 ## interface{} vs [unsafe.Pointer](https://golang.org/pkg/unsafe/#Pointer) 
 
@@ -61,4 +62,12 @@ BenchmarkHashingXXHash64pier-8   	       100000000	       98.4 ns/op	  81.34 MB/
 BenchmarkSliceFillByIndex-8                	 2000000	       886 ns/op
 BenchmarkSliceFillByIndexMake-8            	 2000000	       898 ns/op
 BenchmarkSliceFillMakeAppend-8             	 2000000	       891 ns/op
+```
+
+## Writing and reading atomic ints
+
+```
+BenchmarkAtomicInt32-8     	                   20000	    363591 ns/op
+BenchmarkAtomicInt64-8     	                   20000	    363817 ns/op
+BenchmarkAtomicUintptr-8   	                   20000	    364249 ns/op
 ```
