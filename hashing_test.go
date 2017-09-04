@@ -24,6 +24,7 @@ const hashBufferSize = 8
 func benchmarkHash(b *testing.B, hash func() hash.Hash, length int64) {
 	data := make([]byte, length)
 	b.SetBytes(length)
+	var c uint64
 
 	for i := 0; i < b.N; i++ {
 		h := hash()
@@ -31,32 +32,47 @@ func benchmarkHash(b *testing.B, hash func() hash.Hash, length int64) {
 		if err != nil {
 			panic(err)
 		}
-		_ = h.Sum(nil)
+		b := h.Sum(nil)
+		c += uint64(b[0])
+	}
+	if c == 0 { // unlikely that this will ever fail but it prevents optimizing away the Sum() call
+		b.Fail()
 	}
 }
 
 func benchmarkHash64(b *testing.B, hash func() hash.Hash64, length int64) {
 	data := make([]byte, length)
 	b.SetBytes(length)
+	var c uint64
+
 	for i := 0; i < b.N; i++ {
 		h := hash()
 		_, err := h.Write(data[:])
 		if err != nil {
 			panic(err)
 		}
-		_ = h.Sum64()
+		c += h.Sum64()
+	}
+	if c == 0 { // unlikely that this will ever fail but it prevents optimizing away the Sum() call
+		b.Fail()
 	}
 }
+
 func benchmarkHash64seed(b *testing.B, hash func(uint64) hash.Hash64, length int64) {
 	data := make([]byte, length)
 	b.SetBytes(length)
+	var c uint64
+
 	for i := 0; i < b.N; i++ {
 		h := hash(1471)
 		_, err := h.Write(data[:])
 		if err != nil {
 			panic(err)
 		}
-		_ = h.Sum64()
+		c += h.Sum64()
+	}
+	if c == 0 { // unlikely that this will ever fail but it prevents optimizing away the Sum() call
+		b.Fail()
 	}
 }
 
@@ -131,6 +147,7 @@ func benchmarkHashKeyError(b *testing.B, hash func([]byte) (hash.Hash, error), l
 	data := make([]byte, length)
 	b.SetBytes(length)
 	key := make([]byte, 16)
+	var c uint64
 
 	for i := 0; i < b.N; i++ {
 		h, _ := hash(key)
@@ -138,7 +155,11 @@ func benchmarkHashKeyError(b *testing.B, hash func([]byte) (hash.Hash, error), l
 		if err != nil {
 			panic(err)
 		}
-		_ = h.Sum(nil)
+		b := h.Sum(nil)
+		c += uint64(b[0])
+	}
+	if c == 0 { // unlikely that this will ever fail but it prevents optimizing away the Sum() call
+		b.Fail()
 	}
 }
 
@@ -146,6 +167,7 @@ func benchmarkHashKey64(b *testing.B, hash func([]byte) hash.Hash64, length int6
 	data := make([]byte, length)
 	b.SetBytes(length)
 	key := make([]byte, 16)
+	var c uint64
 
 	for i := 0; i < b.N; i++ {
 		h := hash(key)
@@ -153,9 +175,13 @@ func benchmarkHashKey64(b *testing.B, hash func([]byte) hash.Hash64, length int6
 		if err != nil {
 			panic(err)
 		}
-		_ = h.Sum64()
+		c += h.Sum64()
+	}
+	if c == 0 { // unlikely that this will ever fail but it prevents optimizing away the Sum() call
+		b.Fail()
 	}
 }
+
 func benchmarkHashKey32(b *testing.B, hash func([]byte) hash.Hash32, length int64) {
 	data := make([]byte, length)
 	b.SetBytes(length)
@@ -171,62 +197,62 @@ func benchmarkHashKey32(b *testing.B, hash func([]byte) hash.Hash32, length int6
 	}
 }
 
-func BenchmarkHashingMD5(b *testing.B) {
+func BenchmarkHashing64MD5(b *testing.B) {
 	benchmarkHash(b, md5.New, hashBufferSize)
 }
 
-func BenchmarkHashingSHA1(b *testing.B) {
+func BenchmarkHashing64SHA1(b *testing.B) {
 	benchmarkHash(b, sha1.New, hashBufferSize)
 }
 
-func BenchmarkHashingSHA256(b *testing.B) {
+func BenchmarkHashing64SHA256(b *testing.B) {
 	benchmarkHash(b, sha256.New, hashBufferSize)
 }
 
-func BenchmarkHashingSHA3B224(b *testing.B) {
+func BenchmarkHashing64SHA3B224(b *testing.B) {
 	benchmarkHash(b, sha3.New224, hashBufferSize)
 }
 
-func BenchmarkHashingSHA3B256(b *testing.B) {
+func BenchmarkHashing64SHA3B256(b *testing.B) {
 	benchmarkHash(b, sha3.New256, hashBufferSize)
 }
 
-func BenchmarkHashingRIPEMD160(b *testing.B) {
+func BenchmarkHashing64RIPEMD160(b *testing.B) {
 	benchmarkHash(b, ripemd160.New, hashBufferSize)
 }
 
-func BenchmarkHashingBlake2B(b *testing.B) {
+func BenchmarkHashing64Blake2B(b *testing.B) {
 	benchmarkHashKeyError(b, blake2b.New256, hashBufferSize)
 }
 
-func BenchmarkHashingBlake2BSimd(b *testing.B) {
+func BenchmarkHashing64Blake2BSimd(b *testing.B) {
 	benchmarkHash(b, blake2bsimd.New256, hashBufferSize)
 }
 
-func BenchmarkHashingMurmur3(b *testing.B) {
+func BenchmarkHashing64Murmur3(b *testing.B) {
 	benchmarkHash64(b, murmur3.New64, hashBufferSize)
 }
-func BenchmarkHashingSipHash(b *testing.B) {
+func BenchmarkHashing64SipHash(b *testing.B) {
 	benchmarkHashKey64(b, siphash.New, hashBufferSize)
 }
-func BenchmarkHashingXXHash64(b *testing.B) {
+func BenchmarkHashing64XXHash(b *testing.B) {
 	benchmarkHash64(b, xxhash.New, hashBufferSize)
 }
-func BenchmarkHashingXXHash32vova(b *testing.B) {
-	benchmarkHash32seed(b, xxhash32vova.New, hashBufferSize)
-}
-func BenchmarkHashingXXHash32pier(b *testing.B) {
-	benchmarkHash32seed(b, xxhash32pier.New, hashBufferSize)
-}
-func BenchmarkHashingXXHash64pier(b *testing.B) {
+func BenchmarkHashing64XXHashpier(b *testing.B) {
 	benchmarkHash64seed(b, xxhash64pier.New, hashBufferSize)
 }
-func BenchmarkHashingXXHash64to32(b *testing.B) {
+func BenchmarkHashing32XXHashvova(b *testing.B) {
+	benchmarkHash32seed(b, xxhash32vova.New, hashBufferSize)
+}
+func BenchmarkHashing32XXHashpier(b *testing.B) {
+	benchmarkHash32seed(b, xxhash32pier.New, hashBufferSize)
+}
+func BenchmarkHashing32XXHash(b *testing.B) {
 	benchmarkHash64to32(b, xxhash.New, hashBufferSize)
 }
-func BenchmarkHashingXXHash64to16(b *testing.B) {
+func BenchmarkHashing16XXHash(b *testing.B) {
 	benchmarkHash64to16(b, xxhash.New, hashBufferSize)
 }
-func BenchmarkHashingXXHash64to8(b *testing.B) {
+func BenchmarkHashing8XXHash(b *testing.B) {
 	benchmarkHash64to8(b, xxhash.New, hashBufferSize)
 }
