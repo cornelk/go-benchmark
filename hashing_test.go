@@ -31,7 +31,7 @@ func benchmarkHash(b *testing.B, hash func() hash.Hash, length int64) {
 		if err != nil {
 			panic(err)
 		}
-		h.Sum(nil)
+		_ = h.Sum(nil)
 	}
 }
 
@@ -44,7 +44,7 @@ func benchmarkHash64(b *testing.B, hash func() hash.Hash64, length int64) {
 		if err != nil {
 			panic(err)
 		}
-		h.Sum(nil)
+		_ = h.Sum64()
 	}
 }
 func benchmarkHash64seed(b *testing.B, hash func(uint64) hash.Hash64, length int64) {
@@ -56,9 +56,10 @@ func benchmarkHash64seed(b *testing.B, hash func(uint64) hash.Hash64, length int
 		if err != nil {
 			panic(err)
 		}
-		h.Sum(nil)
+		_ = h.Sum64()
 	}
 }
+
 func benchmarkHash32seed(b *testing.B, hash func(uint32) hash.Hash32, length int64) {
 	data := make([]byte, length)
 	b.SetBytes(length)
@@ -68,9 +69,10 @@ func benchmarkHash32seed(b *testing.B, hash func(uint32) hash.Hash32, length int
 		if err != nil {
 			panic(err)
 		}
-		h.Sum(nil)
+		_ = h.Sum32()
 	}
 }
+
 func benchmarkHash64to32(b *testing.B, hash func() hash.Hash64, length int64) {
 	data := make([]byte, length)
 	b.SetBytes(length)
@@ -91,6 +93,7 @@ func benchmarkHash64to32(b *testing.B, hash func() hash.Hash64, length int64) {
 		)
 	}
 }
+
 func benchmarkHash64to16(b *testing.B, hash func() hash.Hash64, length int64) {
 	data := make([]byte, length)
 	b.SetBytes(length)
@@ -109,6 +112,7 @@ func benchmarkHash64to16(b *testing.B, hash func() hash.Hash64, length int64) {
 		)
 	}
 }
+
 func benchmarkHash64to8(b *testing.B, hash func() hash.Hash64, length int64) {
 	data := make([]byte, length)
 	b.SetBytes(length)
@@ -134,7 +138,7 @@ func benchmarkHashKeyError(b *testing.B, hash func([]byte) (hash.Hash, error), l
 		if err != nil {
 			panic(err)
 		}
-		h.Sum(nil)
+		_ = h.Sum(nil)
 	}
 }
 
@@ -149,7 +153,7 @@ func benchmarkHashKey64(b *testing.B, hash func([]byte) hash.Hash64, length int6
 		if err != nil {
 			panic(err)
 		}
-		h.Sum(nil)
+		_ = h.Sum64()
 	}
 }
 func benchmarkHashKey32(b *testing.B, hash func([]byte) hash.Hash32, length int64) {
@@ -163,7 +167,7 @@ func benchmarkHashKey32(b *testing.B, hash func([]byte) hash.Hash32, length int6
 		if err != nil {
 			panic(err)
 		}
-		h.Sum(nil)
+		_ = h.Sum32()
 	}
 }
 
