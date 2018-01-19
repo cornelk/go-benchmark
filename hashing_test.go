@@ -10,6 +10,7 @@ import (
 	"github.com/cespare/xxhash"
 	"github.com/dchest/siphash"
 	blake2bsimd "github.com/minio/blake2b-simd"
+	"github.com/minio/highwayhash"
 	xxhash32pier "github.com/pierrec/xxHash/xxHash32"
 	xxhash64pier "github.com/pierrec/xxHash/xxHash64"
 	"github.com/spaolacci/murmur3"
@@ -182,6 +183,25 @@ func benchmarkHashKey64(b *testing.B, hash func([]byte) hash.Hash64, length int6
 	}
 }
 
+func benchmarkHashKey64Error(b *testing.B, hash func([]byte) (hash.Hash64, error), length int64) {
+	data := make([]byte, length)
+	b.SetBytes(length)
+	key := make([]byte, 32)
+	var c uint64
+
+	for i := 0; i < b.N; i++ {
+		h, _ := hash(key)
+		_, err := h.Write(data[:])
+		if err != nil {
+			panic(err)
+		}
+		c += h.Sum64()
+	}
+	if c == 0 { // unlikely that this will ever fail but it prevents optimizing away the Sum() call
+		b.Fail()
+	}
+}
+
 func benchmarkHashKey32(b *testing.B, hash func([]byte) hash.Hash32, length int64) {
 	data := make([]byte, length)
 	b.SetBytes(length)
@@ -255,4 +275,8 @@ func BenchmarkHashing16XXHash(b *testing.B) {
 }
 func BenchmarkHashing8XXHash(b *testing.B) {
 	benchmarkHash64to8(b, xxhash.New, hashBufferSize)
+}
+
+func BenchmarkHashing64HighwayHash(b *testing.B) {
+	benchmarkHashKey64Error(b, highwayhash.New64, hashBufferSize)
 }
