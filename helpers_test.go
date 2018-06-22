@@ -10,8 +10,8 @@ const (
 	BenchMarkSizeLong = BenchMarkSize << 5
 )
 
-func generateIntSlice(b *testing.B) [BenchMarkSize]int {
-	var m [BenchMarkSize]int
+func generateIntSlice(b *testing.B) []int {
+	var m = make([]int, BenchMarkSize)
 	for i := 0; i < BenchMarkSize; i++ {
 		m[i] = i
 	}

@@ -4,12 +4,12 @@ import (
 	"testing"
 )
 
-func getSliceItem(index int, m [BenchMarkSize]int) int {
+func getSliceItem(index int, m []int) int {
 	return m[index]
 }
 
-func getSlicePointerItem(index int, m *[BenchMarkSize]int) int {
-	return m[index]
+func getSlicePointerItem(index int, m *[]int) int {
+	return (*m)[index]
 }
 
 func BenchmarkParameterSlicePassedByValue(b *testing.B) {
