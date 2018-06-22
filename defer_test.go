@@ -9,8 +9,7 @@ func BenchmarkDefer(b *testing.B) {
 	for n := 0; n < b.N; n++ {
 		for i := 0; i < BenchMarkSize; i++ {
 			func() {
-				var item int
-				item = m[i]
+				var item = m[i]
 				defer checkItem(b, i, item)
 			}()
 		}
@@ -22,8 +21,7 @@ func BenchmarkDeferNo(b *testing.B) {
 	for n := 0; n < b.N; n++ {
 		for i := 0; i < BenchMarkSize; i++ {
 			func() {
-				var item int
-				item = m[i]
+				var item = m[i]
 				checkItem(b, i, item)
 			}()
 		}
