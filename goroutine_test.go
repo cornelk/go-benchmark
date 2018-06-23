@@ -49,12 +49,9 @@ func newGrp(N int64, valChanCnt int64, loopCnt int64) (r *grp) {
 	return r
 }
 func (g *grp) loop() {
-	for {
-		select {
-		case n := <-g.valsC:
-			g.vals[n] = n % g.cnt
-			g.wg.Done()
-		}
+	for n := range g.valsC {
+		g.vals[n] = n % g.cnt
+		g.wg.Done()
 	}
 }
 
