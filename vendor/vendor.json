@@ -3,16 +3,16 @@
 	"ignore": "test",
 	"package": [
 		{
-			"checksumSHA1": "KsTS6p5oMyMv37BUbCrnxwlHw20=",
+			"checksumSHA1": "AhD99Vn+phH89hmYJFDqiS2gpFY=",
 			"path": "github.com/cespare/xxhash",
-			"revision": "5c37fe3735342a2e0d01c87a907579987c8936cc",
-			"revisionTime": "2017-08-08T05:22:00Z"
+			"revision": "48099fad606eafc26e3a569fad19ff510fff4df6",
+			"revisionTime": "2018-01-29T23:03:33Z"
 		},
 		{
-			"checksumSHA1": "xqVDKHGnakGlcRhmWd1j9JYmfLc=",
+			"checksumSHA1": "CCFJBDs3fGx3AIfbpCNTzNbw5P4=",
 			"path": "github.com/dchest/siphash",
-			"revision": "4ebf1de738443ea7f45f02dc394c4df1942a126d",
-			"revisionTime": "2016-08-31T15:17:26Z"
+			"revision": "34f201214d993633bb24f418ba11736ab8b55aa7",
+			"revisionTime": "2018-08-18T19:55:58Z"
 		},
 		{
 			"checksumSHA1": "mJQtsTCZGhCmjdFtXBWryZSri/o=",
@@ -21,22 +21,26 @@
 			"revisionTime": "2016-07-23T06:10:19Z"
 		},
 		{
+			"checksumSHA1": "2Fu1GmLwDo6FFdahjnlWnPkwJTE=",
+			"path": "github.com/minio/highwayhash",
+			"revision": "85fc8a2dacad36a6beb2865793cd81363a496696",
+			"revisionTime": "2018-05-01T08:09:13Z"
+		},
+		{
 			"checksumSHA1": "zPWRjzsPeXCoqmidIcJtHbvrvRs=",
 			"path": "github.com/pierrec/xxHash/xxHash32",
-			"revision": "a0006b13c722f7f12368c00a3d3c2ae8a999a0c6",
-			"revisionTime": "2017-07-14T08:24:55Z"
+			"revision": ""
 		},
 		{
 			"checksumSHA1": "DJnZn7o0LQAMSLCYkFxCTCTYk7s=",
 			"path": "github.com/pierrec/xxHash/xxHash64",
-			"revision": "a0006b13c722f7f12368c00a3d3c2ae8a999a0c6",
-			"revisionTime": "2017-07-14T08:24:55Z"
+			"revision": ""
 		},
 		{
 			"checksumSHA1": "jAzqolwnRJhHsKXmmvKNrHqxqAw=",
 			"path": "github.com/spaolacci/murmur3",
-			"revision": "9f5d223c60793748f04a9d5b4b4eacddfc1f755d",
-			"revisionTime": "2017-08-19T07:11:01Z"
+			"revision": "f09979ecbc725b9e6d41a297405f65e7e8804acc",
+			"revisionTime": "2018-01-18T20:28:30Z"
 		},
 		{
 			"checksumSHA1": "tsuv2oy9wMYxdV5YtgIHONPUiv0=",
@@ -45,22 +49,24 @@
 			"revisionTime": "2013-03-13T23:02:33Z"
 		},
 		{
-			"checksumSHA1": "5TlXhxVMqfHQKpCKucmXNeE6/kc=",
+			"checksumSHA1": "ejjxT0+wDWWncfh0Rt3lSH4IbXQ=",
 			"path": "golang.org/x/crypto/blake2b",
-			"revision": "81e90905daefcd6fd217b62423c0908922eadb30",
-			"revisionTime": "2017-08-25T20:24:07Z"
+			"revision": ""
 		},
 		{
-			"checksumSHA1": "y/oIaxq2d3WPizRZfVjo8RCRYTU=",
+			"checksumSHA1": "TQoVgHqUD72/5ALzi9p5W3oyaug=",
 			"path": "golang.org/x/crypto/ripemd160",
-			"revision": "81e90905daefcd6fd217b62423c0908922eadb30",
-			"revisionTime": "2017-08-25T20:24:07Z"
+			"revision": ""
 		},
 		{
-			"checksumSHA1": "iNE2KX9BQzCptlQC2DdQEVmn4R4=",
+			"checksumSHA1": "LN1V2pZQwKnoDwcsgXpzG4+Vges=",
 			"path": "golang.org/x/crypto/sha3",
-			"revision": "81e90905daefcd6fd217b62423c0908922eadb30",
-			"revisionTime": "2017-08-25T20:24:07Z"
+			"revision": ""
+		},
+		{
+			"checksumSHA1": "REkmyB368pIiip76LiqMLspgCRk=",
+			"path": "golang.org/x/sys/cpu",
+			"revision": ""
 		}
 	],
 	"rootPath": "github.com/cornelk/go-benchmark"
