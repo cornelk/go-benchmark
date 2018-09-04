@@ -28,8 +28,8 @@ BenchmarkSliceReadLastItemFirst-8          	  500000	      3140 ns/op
 ## Passing a parameter by value vs pointer
 
 ```
-BenchmarkParameterSlicePassedByValue-8     	    5000	    268002 ns/op
-BenchmarkParameterSlicePassedByPointer-8   	  500000	      3138 ns/op
+BenchmarkParameterPassedByPointer-8   	10000000	       150 ns/op
+BenchmarkParameterPassedByValue-8     	10000000	       169 ns/op
 ```
 
 ## Using reflect vs cast
