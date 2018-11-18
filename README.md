@@ -1,74 +1,73 @@
 # go-benchmark
 
-Golang benchmarks used for optimizing code. The benchmarks were run with Golang 1.10.1 and 64 bit on MacOS.
+Golang benchmarks used for optimizing code. The benchmarks were run with Golang 1.11.2 and 64 bit on MacOS.
 
 ## interface{} vs [unsafe.Pointer](https://golang.org/pkg/unsafe/#Pointer) 
 
 ```
-BenchmarkValueUnsafePointer-8              	 2000000	       639 ns/op
-BenchmarkValueInterface-8                  	 2000000	       962 ns/op
+BenchmarkValueUnsafePointer-8             	 2000000	       664 ns/op
+BenchmarkValueInterface-8                 	 2000000	       997 ns/op
 ```
 
 ## Using defer vs not using it
 
 ```
-BenchmarkDefer-8                           	   20000	     58155 ns/op
-BenchmarkDeferNo-8                         	  300000	      5378 ns/op
+BenchmarkDefer-8                          	   20000	     63183 ns/op
+BenchmarkDeferNo-8                        	  200000	      6026 ns/op
 ```
 
 ## Iterating a slice
 
 ```
-BenchmarkSliceReadRange-8                  	  500000	      3392 ns/op
-BenchmarkSliceReadForward-8                	  500000	      3143 ns/op
-BenchmarkSliceReadBackwards-8              	  500000	      3127 ns/op
-BenchmarkSliceReadLastItemFirst-8          	  500000	      3140 ns/op
+BenchmarkSliceReadRange-8                 	  500000	      3264 ns/op
+BenchmarkSliceReadForward-8               	  500000	      3585 ns/op
+BenchmarkSliceReadBackwards-8             	  500000	      3267 ns/op
+BenchmarkSliceReadLastItemFirst-8         	  500000	      3286 ns/op
 ```
 
 ## Passing a parameter by value vs pointer
 
 ```
-BenchmarkParameterPassedByPointer-8   	10000000	       150 ns/op
-BenchmarkParameterPassedByValue-8     	10000000	       169 ns/op
+BenchmarkParameterPassedByPointer-8       	10000000	       157 ns/op
+BenchmarkParameterPassedByValue-8         	10000000	       159 ns/op
 ```
 
 ## Using reflect vs cast
 
 ```
-BenchmarkReflect-8                         	  500000	      4100 ns/op
-BenchmarkCast-8                            	 1000000	      1562 ns/op
+BenchmarkReflect-8                        	  300000	      4383 ns/op
+BenchmarkCast-8                           	 1000000	      1638 ns/op
 ```
 
 ## Hashing algorithms that produce a 64 bit hash of an 8 byte input
 
 ```
-BenchmarkHashing64MD5-8                    	 5000000	       331 ns/op	  24.16 MB/s
-BenchmarkHashing64SHA1-8                   	 5000000	       288 ns/op	  27.72 MB/s
-BenchmarkHashing64SHA256-8                 	 3000000	       511 ns/op	  15.63 MB/s
-BenchmarkHashing64SHA3B224-8               	 1000000	      1334 ns/op	   5.99 MB/s
-BenchmarkHashing64SHA3B256-8               	 1000000	      1107 ns/op	   7.23 MB/s
-BenchmarkHashing64RIPEMD160-8              	 2000000	       934 ns/op	   8.56 MB/s
-BenchmarkHashing64Blake2B-8                	 3000000	       643 ns/op	  12.42 MB/s
-BenchmarkHashing64Blake2BSimd-8            	 3000000	       568 ns/op	  14.08 MB/s
-BenchmarkHashing64Murmur3-8                	20000000	       119 ns/op	  66.76 MB/s
-BenchmarkHashing64SipHash-8                	20000000	        85.6 ns/op	  93.44 MB/s
-BenchmarkHashing64XXHash-8                 	30000000	        64.7 ns/op	 123.74 MB/s
-BenchmarkHashing64XXHashpier-8             	30000000	        69.4 ns/op	 115.25 MB/s
-BenchmarkHashing64HighwayHash-8            	10000000	       147 ns/op	  54.27 MB/s
+BenchmarkHashing64MD5-8                   	 5000000	       330 ns/op	  24.19 MB/s
+BenchmarkHashing64SHA1-8                  	 5000000	       401 ns/op	  19.94 MB/s
+BenchmarkHashing64SHA256-8                	 3000000	       529 ns/op	  15.11 MB/s
+BenchmarkHashing64SHA3B224-8              	 1000000	      1406 ns/op	   5.69 MB/s
+BenchmarkHashing64SHA3B256-8              	 1000000	      1169 ns/op	   6.84 MB/s
+BenchmarkHashing64RIPEMD160-8             	 2000000	       689 ns/op	  11.60 MB/s
+BenchmarkHashing64Blake2B-8               	 3000000	       743 ns/op	  10.76 MB/s
+BenchmarkHashing64Blake2BSimd-8           	 3000000	       794 ns/op	  10.07 MB/s
+BenchmarkHashing64Murmur3-8               	10000000	       107 ns/op	  74.76 MB/s
+BenchmarkHashing64SipHash-8               	20000000	       118 ns/op	  67.73 MB/s
+BenchmarkHashing64XXHash-8                	20000000	        59.6 ns/op	 134.19 MB/s
+BenchmarkHashing64XXHashpier-8            	20000000	        95.2 ns/op	  84.05 MB/s
 ```
 
 ## Filling a slice by index or append
 
 ```
-BenchmarkSliceFillByIndex-8                	 2000000	       870 ns/op
-BenchmarkSliceFillByIndexMake-8            	 2000000	       879 ns/op
-BenchmarkSliceFillMakeAppend-8             	 2000000	       880 ns/op
+BenchmarkSliceFillByIndex-8               	 5000000	       358 ns/op
+BenchmarkSliceFillByIndexMake-8           	 5000000	       356 ns/op
+BenchmarkSliceFillMakeAppend-8            	 2000000	       926 ns/op
 ```
 
 ## Writing and reading an int atomic
 
 ```
-BenchmarkAtomicInt32-8                     	    5000	    355971 ns/op
-BenchmarkAtomicInt64-8                     	    5000	    354907 ns/op
-BenchmarkAtomicUintptr-8                   	    3000	    353769 ns/op
+BenchmarkAtomicInt32-8                    	    5000	    365611 ns/op
+BenchmarkAtomicInt64-8                    	    5000	    359317 ns/op
+BenchmarkAtomicUintptr-8                  	    5000	    363894 ns/op
 ```
