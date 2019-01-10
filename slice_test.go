@@ -1,6 +1,7 @@
 package benchmark
 
 import (
+	"container/list"
 	"testing"
 )
 
@@ -69,6 +70,43 @@ func BenchmarkSliceFillMakeAppend(b *testing.B) {
 		m := make([]int, 0, BenchMarkSize)
 		for i := 0; i < BenchMarkSize; i++ {
 			m = append(m, i)
+		}
+	}
+}
+
+func BenchmarkSliceFillAppendNoMake(b *testing.B) {
+	for n := 0; n < b.N; n++ {
+		m := []int{}
+
+		for i := 0; i < BenchMarkSize; i++ {
+			m = append(m, i)
+		}
+	}
+}
+
+func BenchmarkSliceFillSmallMakeAppend(b *testing.B) {
+	for n := 0; n < b.N; n++ {
+		m := make([]int, 0, BenchMarkSize/10)
+		for i := 0; i < BenchMarkSize; i++ {
+			m = append(m, i)
+		}
+	}
+}
+
+func BenchmarkFillLinkedListPushBack(b *testing.B) {
+	for n := 0; n < b.N; n++ {
+		l := list.New()
+		for i := 0; i < BenchMarkSize; i++ {
+			l.PushBack("a")
+		}
+	}
+}
+
+func BenchmarkFillLinkedListPushFront(b *testing.B) {
+	for n := 0; n < b.N; n++ {
+		l := list.New()
+		for i := 0; i < BenchMarkSize; i++ {
+			l.PushFront("a")
 		}
 	}
 }
