@@ -1,29 +1,6 @@
-# Gopkg.toml example
-#
-# Refer to https://github.com/golang/dep/blob/master/docs/Gopkg.toml.md
-# for detailed Gopkg.toml documentation.
-#
-# required = ["github.com/user/thing/cmd/thing"]
-# ignored = ["github.com/user/project/pkgX", "bitbucket.org/user/project/pkgA/pkgY"]
-#
-# [[constraint]]
-#   name = "github.com/user/project"
-#   version = "1.0.0"
-#
-# [[constraint]]
-#   name = "github.com/user/project2"
-#   branch = "dev"
-#   source = "github.com/myfork/project2"
-#
-# [[override]]
-#   name = "github.com/x/y"
-#   version = "2.4.0"
-#
-# [prune]
-#   non-go = false
-#   go-tests = true
-#   unused-packages = true
-
+required = [
+  "github.com/twmb/murmur3",
+]
 
 [[constraint]]
   name = "github.com/cespare/xxhash"
@@ -31,15 +8,7 @@
 
 [[constraint]]
   name = "github.com/dchest/siphash"
-  version = "1.2.0"
-
-[[constraint]]
-  branch = "master"
-  name = "github.com/minio/blake2b-simd"
-
-[[constraint]]
-  branch = "master"
-  name = "github.com/minio/highwayhash"
+  version = "1.2.1"
 
 [[constraint]]
   name = "github.com/pierrec/xxHash"
@@ -50,12 +19,24 @@
   version = "1.1.0"
 
 [[constraint]]
+  name = "github.com/twmb/murmur3"
   branch = "master"
-  name = "github.com/vova616/xxhash"
 
 [[constraint]]
+  name = "github.com/minio/blake2b-simd"
   branch = "master"
+
+[[constraint]]
+  name = "github.com/minio/highwayhash"
+  branch = "master"
+
+[[constraint]]
+  name = "github.com/vova616/xxhash"
+  branch = "master"
+
+[[constraint]]
   name = "golang.org/x/crypto"
+  branch = "master"
 
 [prune]
   go-tests = true

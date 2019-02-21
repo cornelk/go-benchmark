@@ -6,8 +6,8 @@ import (
 )
 
 const (
-	BenchMarkSize     = 1 << 10 // 1024
-	BenchMarkSizeLong = BenchMarkSize << 5
+	BenchMarkSize     = 1 << 6 // 64
+	BenchMarkSizeLong = BenchMarkSize << 3
 )
 
 func generateIntSlice(b *testing.B) []int {

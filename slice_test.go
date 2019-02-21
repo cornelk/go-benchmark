@@ -76,7 +76,7 @@ func BenchmarkSliceFillMakeAppend(b *testing.B) {
 
 func BenchmarkSliceFillAppendNoMake(b *testing.B) {
 	for n := 0; n < b.N; n++ {
-		m := []int{}
+		var m []int
 
 		for i := 0; i < BenchMarkSize; i++ {
 			m = append(m, i)

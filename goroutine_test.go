@@ -120,20 +120,6 @@ func BenchmarkGoroutineChan10000RteCPU(b *testing.B) {
 		}
 	})
 }
-func BenchmarkGoroutineChan100000RteCPU(b *testing.B) {
-	cnt := int64(b.N)
-	b.RunParallel(func(pb *testing.PB) {
-		for pb.Next() {
-			grp := newGrp(cnt, 100000, int64(runtime.NumCPU()))
-			grp.wg.Add(b.N)
-			for n := int64(0); n < cnt; n++ {
-				grp.valsC <- n
-			}
-			grp.wg.Wait()
-		}
-	})
-}
-
 func BenchmarkGoroutineChan10Rte10(b *testing.B) {
 	cnt := int64(b.N)
 	b.RunParallel(func(pb *testing.PB) {
@@ -165,19 +151,6 @@ func BenchmarkGoroutineChan10000Rte10000(b *testing.B) {
 	b.RunParallel(func(pb *testing.PB) {
 		for pb.Next() {
 			grp := newGrp(cnt, 10000, 10000)
-			grp.wg.Add(b.N)
-			for n := int64(0); n < cnt; n++ {
-				grp.valsC <- n
-			}
-			grp.wg.Wait()
-		}
-	})
-}
-func BenchmarkGoroutineChan100000Rte100000(b *testing.B) {
-	cnt := int64(b.N)
-	b.RunParallel(func(pb *testing.PB) {
-		for pb.Next() {
-			grp := newGrp(cnt, 100000, 100000)
 			grp.wg.Add(b.N)
 			for n := int64(0); n < cnt; n++ {
 				grp.valsC <- n

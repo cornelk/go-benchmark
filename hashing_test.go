@@ -4,16 +4,17 @@ import (
 	"crypto/md5"
 	"crypto/sha1"
 	"crypto/sha256"
+	"github.com/minio/highwayhash"
 	"hash"
 	"testing"
 
 	"github.com/cespare/xxhash"
 	"github.com/dchest/siphash"
 	blake2bsimd "github.com/minio/blake2b-simd"
-	"github.com/minio/highwayhash"
 	xxhash32pier "github.com/pierrec/xxHash/xxHash32"
 	xxhash64pier "github.com/pierrec/xxHash/xxHash64"
 	"github.com/spaolacci/murmur3"
+	murmur3twmb "github.com/twmb/murmur3"
 	xxhash32vova "github.com/vova616/xxhash"
 	"golang.org/x/crypto/blake2b"
 	"golang.org/x/crypto/ripemd160"
@@ -252,31 +253,43 @@ func BenchmarkHashing64Blake2BSimd(b *testing.B) {
 func BenchmarkHashing64Murmur3(b *testing.B) {
 	benchmarkHash64(b, murmur3.New64, hashBufferSize)
 }
+
+func BenchmarkHashing64Murmur3Twmb(b *testing.B) {
+	benchmarkHash64(b, murmur3twmb.New64, hashBufferSize)
+}
+
 func BenchmarkHashing64SipHash(b *testing.B) {
 	benchmarkHashKey64(b, siphash.New, hashBufferSize)
 }
+
 func BenchmarkHashing64XXHash(b *testing.B) {
 	benchmarkHash64(b, xxhash.New, hashBufferSize)
 }
+
 func BenchmarkHashing64XXHashpier(b *testing.B) {
 	benchmarkHash64seed(b, xxhash64pier.New, hashBufferSize)
-}
-func BenchmarkHashing32XXHashvova(b *testing.B) {
-	benchmarkHash32seed(b, xxhash32vova.New, hashBufferSize)
-}
-func BenchmarkHashing32XXHashpier(b *testing.B) {
-	benchmarkHash32seed(b, xxhash32pier.New, hashBufferSize)
-}
-func BenchmarkHashing32XXHash(b *testing.B) {
-	benchmarkHash64to32(b, xxhash.New, hashBufferSize)
-}
-func BenchmarkHashing16XXHash(b *testing.B) {
-	benchmarkHash64to16(b, xxhash.New, hashBufferSize)
-}
-func BenchmarkHashing8XXHash(b *testing.B) {
-	benchmarkHash64to8(b, xxhash.New, hashBufferSize)
 }
 
 func BenchmarkHashing64HighwayHash(b *testing.B) {
 	benchmarkHashKey64Error(b, highwayhash.New64, hashBufferSize)
+}
+
+func BenchmarkHashing32XXHashvova(b *testing.B) {
+	benchmarkHash32seed(b, xxhash32vova.New, hashBufferSize)
+}
+
+func BenchmarkHashing32XXHashpier(b *testing.B) {
+	benchmarkHash32seed(b, xxhash32pier.New, hashBufferSize)
+}
+
+func BenchmarkHashing32XXHash(b *testing.B) {
+	benchmarkHash64to32(b, xxhash.New, hashBufferSize)
+}
+
+func BenchmarkHashing16XXHash(b *testing.B) {
+	benchmarkHash64to16(b, xxhash.New, hashBufferSize)
+}
+
+func BenchmarkHashing8XXHash(b *testing.B) {
+	benchmarkHash64to8(b, xxhash.New, hashBufferSize)
 }

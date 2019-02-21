@@ -2,69 +2,108 @@
 
 
 [[projects]]
+  digest = "1:4c69f3f6b7b2f6481f858db3cb7a84c7a5958287be33ec05ce4814ea49ef555d"
   name = "github.com/cespare/xxhash"
   packages = ["."]
+  pruneopts = "UT"
   revision = "569f7c8abf1f58d9043ab804d364483cb1c853b6"
   version = "v1.1.0"
 
 [[projects]]
+  digest = "1:1e9a0ec4f7e852123fefad9aadd7647eed1e9fd3716118e99a4b3dc463705c82"
   name = "github.com/dchest/siphash"
   packages = ["."]
-  revision = "ca249f45189071f5d44dc6401334e3572037b9cb"
-  version = "v1.2.0"
+  pruneopts = "UT"
+  revision = "34f201214d993633bb24f418ba11736ab8b55aa7"
+  version = "v1.2.1"
 
 [[projects]]
   branch = "master"
+  digest = "1:130cefe87d7eeefc824978dcb78e35672d4c49a11f25c153fbf0cfd952756fa3"
   name = "github.com/minio/blake2b-simd"
   packages = ["."]
+  pruneopts = "UT"
   revision = "3f5f724cb5b182a5c278d6d3d55b40e7f8c2efb4"
 
 [[projects]]
   branch = "master"
+  digest = "1:c99caced18127b6ae7a0be25bdf64155a8b5337d18fce1e7df0a8e68beb18767"
   name = "github.com/minio/highwayhash"
   packages = ["."]
+  pruneopts = "UT"
   revision = "85fc8a2dacad36a6beb2865793cd81363a496696"
 
 [[projects]]
+  digest = "1:c4133846040165740e352ff46b17b108fa2d093b2a813078da838dcf076af4b0"
   name = "github.com/pierrec/xxHash"
   packages = [
     "xxHash32",
     "xxHash64",
   ]
+  pruneopts = "UT"
   revision = "f051bb7f1d1aaf1b5a665d74fb6b0217712c69f7"
   version = "v0.1.1"
 
 [[projects]]
+  digest = "1:919bb3aa6d9d0b67648c219fa4925312bc3c2872da19e818fa769e9c97a2b643"
   name = "github.com/spaolacci/murmur3"
   packages = ["."]
+  pruneopts = "UT"
   revision = "9f5d223c60793748f04a9d5b4b4eacddfc1f755d"
   version = "v1.1"
 
 [[projects]]
   branch = "master"
+  digest = "1:db1b3056e78b014caa45667149d12a2318da8c5719a918466027a9d80a921e22"
+  name = "github.com/twmb/murmur3"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "930dc7964b3063728bf18f50b7ff72837b7d9860"
+
+[[projects]]
+  branch = "master"
+  digest = "1:a7cbc2532c48a223b5d702e2207e29d12998f45516f68b4acf946808ba2ba7f9"
   name = "github.com/vova616/xxhash"
   packages = ["."]
+  pruneopts = "UT"
   revision = "f0a9a8b74d487f9563a527daf3bd6b4fbd3f5d00"
 
 [[projects]]
   branch = "master"
+  digest = "1:3a592d1aacbc4b05868126cadc5259722bc011bcd5d1c1029add7fd0a38b7063"
   name = "golang.org/x/crypto"
   packages = [
     "blake2b",
     "ripemd160",
     "sha3",
   ]
+  pruneopts = "UT"
   revision = "3d3f9f413869b949e48070b5bc593aa22cc2b8f2"
 
 [[projects]]
   branch = "master"
+  digest = "1:8392490b249a3602a13813be12324d3b16eca044ae185ff32cdd9e267706e208"
   name = "golang.org/x/sys"
   packages = ["cpu"]
+  pruneopts = "UT"
   revision = "93218def8b18e66adbdab3eca8ec334700329f1f"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "ca2d50b8e68bb5e0f81c253d44c33064ad4e89e9a26eefebcf0a066d5cec0ab5"
+  input-imports = [
+    "github.com/cespare/xxhash",
+    "github.com/dchest/siphash",
+    "github.com/minio/blake2b-simd",
+    "github.com/minio/highwayhash",
+    "github.com/pierrec/xxHash/xxHash32",
+    "github.com/pierrec/xxHash/xxHash64",
+    "github.com/spaolacci/murmur3",
+    "github.com/twmb/murmur3",
+    "github.com/vova616/xxhash",
+    "golang.org/x/crypto/blake2b",
+    "golang.org/x/crypto/ripemd160",
+    "golang.org/x/crypto/sha3",
+  ]
   solver-name = "gps-cdcl"
   solver-version = 1
