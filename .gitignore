@@ -1,4 +1,19 @@
-.DS_Store
-*.iml
+# IDE settings
+.fleet
 .idea
+.vscode
+
+# binary and temp files
 *.exe
+*.iml
+*.local
+*.log
+*.out
+*.prof
+*.test
+.DS_Store
+*.dmp
+*.db
+.testCoverage
+
+/.bench.output
