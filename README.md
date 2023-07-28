@@ -12,8 +12,8 @@ ValueInterface-8              180.2n ±  5%
 ## Using defer vs not using it
 
 ```
-Defer-8                       284.2n ±  7%
-DeferNo-8                     26.45n ±  1%
+Defer-8       223.9n ± 3%
+DeferNo-8     106.2n ± 7%
 ```
 
 ## Iterating a slice
