@@ -6,5 +6,5 @@ bench: ## run benchmarks
 
 benchmark-perflock: ## run benchmarks using perflock - https://github.com/aclements/perflock
 	go install golang.org/x/perf/cmd/benchstat@latest
-	perflock -governor 80% go test -count 10 -cpu 8 -run=^# -bench=Slice. | tee .bench.output
+	perflock -governor 80% go test -count 6 -cpu 8 -timeout 1h -run=^# -bench=. | tee .bench.output
 	benchstat .bench.output
