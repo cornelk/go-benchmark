@@ -1,76 +1,77 @@
 # go-benchmark
 
-Golang benchmarks used for optimizing code. The benchmarks were run with Golang 1.19.0 and 64 bit CPU on Linux.
+Golang benchmarks used for optimizing code. The benchmarks were run with Golang 1.20.6 and 64 bit CPU on Linux using `make benchmark-perflock`.
 
 ## interface{} vs [unsafe.Pointer](https://golang.org/pkg/unsafe/#Pointer) 
 
 ```
-BenchmarkValueUnsafePointer             38438962                31.28 ns/op
-BenchmarkValueInterface                 35784254                34.47 ns/op
+ValueUnsafePointer-8          33.33n ±  4%
+ValueInterface-8              180.2n ±  5%
 ```
 
 ## Using defer vs not using it
 
 ```
-BenchmarkDefer                           4565286               263.3 ns/op
-BenchmarkDeferNo                        48542449                25.06 ns/op
+Defer-8                       284.2n ±  7%
+DeferNo-8                     26.45n ±  1%
 ```
 
 ## Iterating a slice
 
 ```
-BenchmarkSliceReadRange                 66977254                18.43 ns/op
-BenchmarkSliceReadForward               48649504                24.98 ns/op
-BenchmarkSliceReadBackwards             28933062                44.26 ns/op
-BenchmarkSliceReadLastItemFirst         42361663                31.40 ns/op
+SliceReadRange-8              19.71n ±  3%
+SliceReadForward-8            25.89n ±  2%
+SliceReadBackwards-8          46.48n ±  3%
+SliceReadLastItemFirst-8      32.82n ±  4%
 ```
 
 ## Passing a parameter by value vs pointer
 
 ```
-BenchmarkParameterPassedByPointer       167757066                7.093 ns/op
-BenchmarkParameterPassedByValue         25323952                46.14 ns/op
+ParameterPassedByPointer-8    8.391n ±  5%
+ParameterPassedByValue-8      8.755n ±  3%
 ```
 
 ## Using reflect vs cast
 
 ```
-BenchmarkReflect                        10426641               114.5 ns/op
-BenchmarkCast                           26002623                46.73 ns/op
+Reflect-8                     253.5n ±  5%
+Cast-8                        181.1n ±  5%
 ```
 
 ## Hashing algorithms that produce a 64 bit hash of an 8 byte input
 
 ```
-BenchmarkHashing64MD5                   10458847               114.8 ns/op        69.71 MB/s
-BenchmarkHashing64SHA1                   8493391               141.2 ns/op        56.66 MB/s
-BenchmarkHashing64SHA256                 6398036               187.1 ns/op        42.75 MB/s
-BenchmarkHashing64SHA3B224               2091546               573.1 ns/op        13.96 MB/s
-BenchmarkHashing64SHA3B256               2102798               569.2 ns/op        14.06 MB/s
-BenchmarkHashing64RIPEMD160              3957055               303.1 ns/op        26.40 MB/s
-BenchmarkHashing64Blake2B                4042722               296.9 ns/op        26.95 MB/s
-BenchmarkHashing64Blake2BSimd            4844781               247.7 ns/op        32.30 MB/s
-BenchmarkHashing64Murmur3               25517697                47.19 ns/op      169.52 MB/s
-BenchmarkHashing64Murmur3Twmb           25722096                46.34 ns/op      172.65 MB/s
-BenchmarkHashing64SipHash               28485819                41.71 ns/op      191.82 MB/s
-BenchmarkHashing64XXHash                46363768                25.71 ns/op      311.20 MB/s
-BenchmarkHashing64XXHashpier            44888440                26.43 ns/op      302.64 MB/s
+Hashing64MD5-8                140.5n ±  1%
+Hashing64SHA1-8               153.8n ±  2%
+Hashing64SHA256-8             202.1n ±  2%
+Hashing64SHA3B224-8           667.0n ±  1%
+Hashing64SHA3B256-8           663.7n ±  1%
+Hashing64RIPEMD160-8          328.6n ±  1%
+Hashing64Blake2B-8            357.9n ±  3%
+Hashing64Blake2BSimd-8        316.1n ±  3%
+Hashing64Murmur3-8            55.27n ±  3%
+Hashing64Murmur3Twmb-8        55.00n ±  1%
+Hashing64SipHash-8            52.53n ±  1%
+Hashing64XXHash-8             36.08n ±  1%
+Hashing64XXHashpier-8         37.45n ±  1%
+Hashing64HighwayHash-8        89.78n ±  1%
 ```
 
 ## Filling a slice by index or append
 
 ```
-BenchmarkSliceFillByIndex               80740214                14.54 ns/op
-BenchmarkSliceFillByIndexMake           80448338                14.51 ns/op
-BenchmarkSliceFillMakeAppend            46544547                25.78 ns/op
-BenchmarkSliceFillAppendNoMake           5809389               211.2 ns/op
-BenchmarkSliceFillSmallMakeAppend        6118882               190.6 ns/op
+SliceFillByIndex-8            15.28n ±  0%
+SliceFillByIndexMake-8        15.28n ±  0%
+SliceFillMakeAppend-8         34.77n ±  1%
+SliceFillAppendNoMake-8       253.5n ±  3%
+SliceFillSmallMakeAppend-8    308.5n ±  1%
 ```
 
 ## Writing and reading an int atomic
 
 ```
-BenchmarkAtomicInt32                     1365267               878.1 ns/op
-BenchmarkAtomicInt64                     1366141               878.4 ns/op
-BenchmarkAtomicUintptr                   1367601               872.5 ns/op
+AtomicInt32-8                 924.3n ±  1%
+AtomicInt64-8                 923.9n ±  0%
+AtomicUintptr-8               923.2n ±  0%
 ```
