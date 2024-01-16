@@ -1,6 +1,6 @@
 module github.com/cornelk/go-benchmark
 
-go 1.16
+go 1.20
 
 require (
 	github.com/cespare/xxhash v1.1.0
@@ -9,7 +9,9 @@ require (
 	github.com/minio/highwayhash v1.0.3-0.20230104182448-9cb37b8cb4e3
 	github.com/pierrec/xxHash v0.1.6-0.20201207091724-36da3d21705c
 	github.com/spaolacci/murmur3 v1.1.1-0.20190317074736-539464a789e9
-	github.com/twmb/murmur3 v1.1.7-0.20220427190113-753d98dbde7d
+	github.com/twmb/murmur3 v1.1.8
 	github.com/vova616/xxhash v0.0.0-20191210231457-381b6b669083
-	golang.org/x/crypto v0.6.0
+	golang.org/x/crypto v0.18.0
 )
+
+require golang.org/x/sys v0.16.0 // indirect
