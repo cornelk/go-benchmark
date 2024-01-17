@@ -4,7 +4,7 @@ import (
 	"crypto/md5"
 	"crypto/sha1"
 	"crypto/sha256"
-	"hash"
+	"io"
 	"testing"
 
 	xxhashcespare "github.com/cespare/xxhash"
@@ -23,7 +23,28 @@ import (
 
 const hashBufferSize = 8
 
-func benchmarkHash(b *testing.B, hash func() hash.Hash, length int64) {
+// hash is the common interface implemented by all hash functions.
+type hash interface {
+	io.Writer
+
+	Sum(b []byte) []byte
+}
+
+// hash32 is the common interface implemented by all 32-bit hash functions.
+type hash32 interface {
+	io.Writer
+
+	Sum32() uint32
+}
+
+// hash64 is the common interface implemented by all 64-bit hash functions.
+type hash64 interface {
+	io.Writer
+
+	Sum64() uint64
+}
+
+func benchmarkHash[T hash](b *testing.B, hash func() T, length int64) {
 	data := make([]byte, length)
 	b.SetBytes(length)
 	var c uint64
@@ -42,7 +63,7 @@ func benchmarkHash(b *testing.B, hash func() hash.Hash, length int64) {
 	}
 }
 
-func benchmarkHash64(b *testing.B, hash func() hash.Hash64, length int64) {
+func benchmarkHash64[T hash64](b *testing.B, hash func() T, length int64) {
 	data := make([]byte, length)
 	b.SetBytes(length)
 	var c uint64
@@ -60,7 +81,7 @@ func benchmarkHash64(b *testing.B, hash func() hash.Hash64, length int64) {
 	}
 }
 
-func benchmarkHash64seed(b *testing.B, hash func(uint64) hash.Hash64, length int64) {
+func benchmarkHash64seed[T hash64](b *testing.B, hash func(uint64) T, length int64) {
 	data := make([]byte, length)
 	b.SetBytes(length)
 	var c uint64
@@ -78,7 +99,7 @@ func benchmarkHash64seed(b *testing.B, hash func(uint64) hash.Hash64, length int
 	}
 }
 
-func benchmarkHash32seed(b *testing.B, hash func(uint32) hash.Hash32, length int64) {
+func benchmarkHash32seed[T hash32](b *testing.B, hash func(uint32) T, length int64) {
 	data := make([]byte, length)
 	b.SetBytes(length)
 	for i := 0; i < b.N; i++ {
@@ -91,7 +112,7 @@ func benchmarkHash32seed(b *testing.B, hash func(uint32) hash.Hash32, length int
 	}
 }
 
-func benchmarkHash64to32(b *testing.B, hash func() hash.Hash64, length int64) {
+func benchmarkHash64to32[T hash64](b *testing.B, hash func() T, length int64) {
 	data := make([]byte, length)
 	b.SetBytes(length)
 	for i := 0; i < b.N; i++ {
@@ -112,7 +133,7 @@ func benchmarkHash64to32(b *testing.B, hash func() hash.Hash64, length int64) {
 	}
 }
 
-func benchmarkHash64to16(b *testing.B, hash func() hash.Hash64, length int64) {
+func benchmarkHash64to16[T hash64](b *testing.B, hash func() T, length int64) {
 	data := make([]byte, length)
 	b.SetBytes(length)
 	for i := 0; i < b.N; i++ {
@@ -131,7 +152,7 @@ func benchmarkHash64to16(b *testing.B, hash func() hash.Hash64, length int64) {
 	}
 }
 
-func benchmarkHash64to8(b *testing.B, hash func() hash.Hash64, length int64) {
+func benchmarkHash64to8[T hash64](b *testing.B, hash func() T, length int64) {
 	data := make([]byte, length)
 	b.SetBytes(length)
 	for i := 0; i < b.N; i++ {
@@ -145,7 +166,7 @@ func benchmarkHash64to8(b *testing.B, hash func() hash.Hash64, length int64) {
 	}
 }
 
-func benchmarkHashKeyError(b *testing.B, hash func([]byte) (hash.Hash, error), length int64) {
+func benchmarkHashKeyError[T hash](b *testing.B, hash func([]byte) (T, error), length int64) {
 	data := make([]byte, length)
 	b.SetBytes(length)
 	key := make([]byte, 16)
@@ -165,7 +186,7 @@ func benchmarkHashKeyError(b *testing.B, hash func([]byte) (hash.Hash, error), l
 	}
 }
 
-func benchmarkHashKey64(b *testing.B, hash func([]byte) hash.Hash64, length int64) {
+func benchmarkHashKey64[T hash64](b *testing.B, hash func([]byte) T, length int64) {
 	data := make([]byte, length)
 	b.SetBytes(length)
 	key := make([]byte, 16)
@@ -184,7 +205,7 @@ func benchmarkHashKey64(b *testing.B, hash func([]byte) hash.Hash64, length int6
 	}
 }
 
-func benchmarkHashKey64Error(b *testing.B, hash func([]byte) (hash.Hash64, error), length int64) {
+func benchmarkHashKey64Error[T hash64](b *testing.B, hash func([]byte) (T, error), length int64) {
 	data := make([]byte, length)
 	b.SetBytes(length)
 	key := make([]byte, 32)
@@ -203,7 +224,7 @@ func benchmarkHashKey64Error(b *testing.B, hash func([]byte) (hash.Hash64, error
 	}
 }
 
-func benchmarkHashKey32(b *testing.B, hash func([]byte) hash.Hash32, length int64) {
+func benchmarkHashKey32[T hash32](b *testing.B, hash func([]byte) hash32, length int64) {
 	data := make([]byte, length)
 	b.SetBytes(length)
 	key := make([]byte, 8)
