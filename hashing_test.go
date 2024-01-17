@@ -7,7 +7,7 @@ import (
 	"io"
 	"testing"
 
-	xxhashcespare "github.com/cespare/xxhash"
+	xxhashcespare "github.com/cespare/xxhash/v2"
 	"github.com/dchest/siphash"
 	blake2bsimd "github.com/minio/blake2b-simd"
 	"github.com/minio/highwayhash"

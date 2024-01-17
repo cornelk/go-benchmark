@@ -3,7 +3,7 @@ module github.com/cornelk/go-benchmark
 go 1.20
 
 require (
-	github.com/cespare/xxhash v1.1.0
+	github.com/cespare/xxhash/v2 v2.2.0
 	github.com/dchest/siphash v1.2.3
 	github.com/minio/blake2b-simd v0.0.0-20160723061019-3f5f724cb5b1
 	github.com/minio/highwayhash v1.0.3-0.20230104182448-9cb37b8cb4e3
