@@ -11,7 +11,7 @@ require (
 	github.com/spaolacci/murmur3 v1.1.1-0.20190317074736-539464a789e9
 	github.com/twmb/murmur3 v1.1.8
 	github.com/vova616/xxhash v0.0.0-20191210231457-381b6b669083
-	golang.org/x/crypto v0.18.0
+	golang.org/x/crypto v0.19.0
 )
 
-require golang.org/x/sys v0.16.0 // indirect
+require golang.org/x/sys v0.17.0 // indirect
