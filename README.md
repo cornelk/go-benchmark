@@ -1,77 +1,77 @@
 # go-benchmark
 
-Golang benchmarks used for optimizing code. The benchmarks were run with Golang 1.22.0 and 64 bit CPU on Linux using `make benchmark-perflock`.
+Golang benchmarks used for optimizing code. The benchmarks were run with Golang 1.23.3 and 64 bit CPU on Linux using `make benchmark-perflock`.
 
 ## interface{} vs [unsafe.Pointer](https://golang.org/pkg/unsafe/#Pointer) 
 
 ```
-ValueUnsafePointer-8          23.52n ±  5%
-ValueInterface-8              245.8n ± 13%
+ValueUnsafePointer-8          24.31n ±  3%
+ValueInterface-8              216.2n ±  1%
 ```
 
 ## Using defer vs not using it
 
 ```
-Defer-8                       256.1n ±  7%
-DeferNo-8                     124.9n ± 10%
+Defer-8                       237.5n ±  1%
+DeferNo-8                     146.7n ±  1%
 ```
 
 ## Iterating a slice
 
 ```
-SliceReadRange-8              21.11n ±  5%
-SliceReadForward-8            36.12n ±  6%
-SliceReadBackwards-8          36.56n ±  6%
-SliceReadLastItemFirst-8      36.38n ±  5%
+SliceReadRange-8              24.21n ±  1%
+SliceReadForward-8            40.07n ±  0%
+SliceReadBackwards-8          40.54n ±  0%
+SliceReadLastItemFirst-8      40.53n ±  7%
 ```
 
 ## Passing a parameter by value vs pointer
 
 ```
-ParameterPassedByPointer-8    10.94n ±  9%
-ParameterPassedByValue-8      10.96n ±  4%
+ParameterPassedByPointer-8    9.906n ±  0%
+ParameterPassedByValue-8      9.950n ±  2%
 ```
 
 ## Using reflect vs cast
 
 ```
-Reflect-8                     344.8n ±  5%
-Cast-8                        236.1n ±  7%
+Reflect-8                     338.9n ±  0%
+Cast-8                        216.4n ±  1%
 ```
 
 ## Hashing algorithms that produce a 64 bit hash of an 8 byte input
 
 ```
-Hashing64MD5-8                140.5n ±  1%
-Hashing64SHA1-8               170.4n ±  2%
-Hashing64SHA256-8             124.9n ±  1%
-Hashing64SHA3B224-8           697.2n ±  2%
-Hashing64SHA3B256-8           693.5n ±  1%
-Hashing64RIPEMD160-8          382.2n ±  2%
-Hashing64Blake2B-8            377.4n ±  1%
-Hashing64Blake2BSimd-8        347.4n ±  1%
-Hashing64Murmur3-8            58.18n ±  2%
-Hashing64Murmur3Twmb-8        57.77n ±  2%
-Hashing64SipHash-8            59.51n ±  4%
-Hashing64XXHash-8             36.08n ±  2%
-Hashing64XXHashpier-8         41.67n ±  1%
-Hashing64HighwayHash-8        96.17n ±  1%
+Hashing64MD5-8                156.4n ±  1%
+Hashing64SHA1-8               186.3n ±  1%
+Hashing64SHA256-8             134.5n ±  0%
+Hashing64SHA3B224-8           470.1n ±  1%
+Hashing64SHA3B256-8           469.9n ±  2%
+Hashing64RIPEMD160-8          399.4n ±  1%
+Hashing64Blake2B-8            420.8n ±  1%
+Hashing64Blake2BSimd-8        360.5n ±  1%
+Hashing64Murmur3-8            59.85n ±  1%
+Hashing64Murmur3Twmb-8        60.65n ±  1%
+Hashing64SipHash-8            63.14n ±  1%
+Hashing64XXHash-8             37.37n ±  1%
+Hashing64XXHashpier-8         42.93n ±  2%
+Hashing64HighwayHash-8        94.79n ±  1%
 ```
 
 ## Filling a slice by index or append
 
 ```
-SliceFillByIndex-8            15.88n ±  3%
-SliceFillByIndexMake-8        15.83n ±  2%
-SliceFillMakeAppend-8         40.36n ±  2%
-SliceFillAppendNoMake-8       271.4n ±  6%
-SliceFillSmallMakeAppend-8    338.2n ±  1%
+SliceFillByIndex-8            19.20n ±  1%
+SliceFillByIndexMake-8        19.21n ±  0%
+SliceFillMakeAppend-8         30.91n ±  1%
+SliceFillAppendNoMake-8       302.1n ± 10%
+SliceFillSmallMakeAppend-8    336.9n ±  2%
 ```
 
 ## Writing and reading an int atomic
 
 ```
-AtomicInt32-8                 956.8n ±  2%
-AtomicInt64-8                 958.1n ±  3%
-AtomicUintptr-8               951.5n ±  5%
+AtomicInt32-8                 1.144µ ±  1%
+AtomicInt64-8                 1.145µ ±  1%
+AtomicUintptr-8               1.145µ ±  0%
 ```
