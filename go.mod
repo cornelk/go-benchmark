@@ -1,6 +1,6 @@
 module github.com/cornelk/go-benchmark
 
-go 1.20
+go 1.24
 
 require (
 	github.com/cespare/xxhash/v2 v2.3.0
@@ -11,7 +11,7 @@ require (
 	github.com/spaolacci/murmur3 v1.1.1-0.20190317074736-539464a789e9
 	github.com/twmb/murmur3 v1.1.8
 	github.com/vova616/xxhash v0.0.0-20191210231457-381b6b669083
-	golang.org/x/crypto v0.29.0
+	golang.org/x/crypto v0.36.0
 )
 
-require golang.org/x/sys v0.27.0 // indirect
+require golang.org/x/sys v0.31.0 // indirect
