@@ -47,7 +47,7 @@ func setup() {
 		// is all mapped to our address space.
 		// If we don't do this the first test case would be slower
 		// as it is triggering all the page faults.
-		for i := 0; i < len(as); i++ {
+		for i := range as {
 			for j := 0; j < len(as[i].A); j += 32 {
 				as[i].A[j] = byte(rand.Intn(256))
 			}

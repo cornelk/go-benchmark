@@ -17,7 +17,7 @@ func BenchmarkSliceReadRange(b *testing.B) {
 func BenchmarkSliceReadForward(b *testing.B) {
 	m := generateIntSlice(b)
 	for n := 0; n < b.N; n++ {
-		for i := 0; i < BenchMarkSize; i++ {
+		for i := range BenchMarkSize {
 			e := m[i]
 			checkItem(b, i, e)
 		}
@@ -40,7 +40,7 @@ func BenchmarkSliceReadLastItemFirst(b *testing.B) {
 		if m[BenchMarkSize-1] != BenchMarkSize-1 {
 			b.Fail()
 		}
-		for i := 0; i < BenchMarkSize; i++ {
+		for i := range BenchMarkSize {
 			e := m[i]
 			checkItem(b, i, e)
 		}
@@ -50,7 +50,7 @@ func BenchmarkSliceReadLastItemFirst(b *testing.B) {
 func BenchmarkSliceFillByIndex(b *testing.B) {
 	for n := 0; n < b.N; n++ {
 		var m [BenchMarkSize]int
-		for i := 0; i < BenchMarkSize; i++ {
+		for i := range BenchMarkSize {
 			m[i] = i
 		}
 	}
@@ -59,7 +59,7 @@ func BenchmarkSliceFillByIndex(b *testing.B) {
 func BenchmarkSliceFillByIndexMake(b *testing.B) {
 	for n := 0; n < b.N; n++ {
 		m := make([]int, BenchMarkSize)
-		for i := 0; i < BenchMarkSize; i++ {
+		for i := range BenchMarkSize {
 			m[i] = i
 		}
 	}
@@ -68,7 +68,7 @@ func BenchmarkSliceFillByIndexMake(b *testing.B) {
 func BenchmarkSliceFillMakeAppend(b *testing.B) {
 	for n := 0; n < b.N; n++ {
 		m := make([]int, 0, BenchMarkSize)
-		for i := 0; i < BenchMarkSize; i++ {
+		for i := range BenchMarkSize {
 			m = append(m, i)
 		}
 	}
@@ -78,7 +78,7 @@ func BenchmarkSliceFillAppendNoMake(b *testing.B) {
 	for n := 0; n < b.N; n++ {
 		var m []int
 
-		for i := 0; i < BenchMarkSize; i++ {
+		for i := range BenchMarkSize {
 			m = append(m, i)
 		}
 	}
@@ -87,7 +87,7 @@ func BenchmarkSliceFillAppendNoMake(b *testing.B) {
 func BenchmarkSliceFillSmallMakeAppend(b *testing.B) {
 	for n := 0; n < b.N; n++ {
 		m := make([]int, 0, BenchMarkSize/10)
-		for i := 0; i < BenchMarkSize; i++ {
+		for i := range BenchMarkSize {
 			m = append(m, i)
 		}
 	}
@@ -96,7 +96,7 @@ func BenchmarkSliceFillSmallMakeAppend(b *testing.B) {
 func BenchmarkFillLinkedListPushBack(b *testing.B) {
 	for n := 0; n < b.N; n++ {
 		l := list.New()
-		for i := 0; i < BenchMarkSize; i++ {
+		for range BenchMarkSize {
 			l.PushBack("a")
 		}
 	}
@@ -105,7 +105,7 @@ func BenchmarkFillLinkedListPushBack(b *testing.B) {
 func BenchmarkFillLinkedListPushFront(b *testing.B) {
 	for n := 0; n < b.N; n++ {
 		l := list.New()
-		for i := 0; i < BenchMarkSize; i++ {
+		for range BenchMarkSize {
 			l.PushFront("a")
 		}
 	}

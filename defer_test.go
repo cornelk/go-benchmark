@@ -26,7 +26,7 @@ func checkDeferNo(b *testing.B, index, item int) {
 func BenchmarkDefer(b *testing.B) {
 	m := generateIntSlice(b)
 	for n := 0; n < b.N; n++ {
-		for i := 0; i < len(m); i++ {
+		for i := range m {
 			var item = m[i]
 			checkDefer(b, i, item)
 		}
@@ -36,7 +36,7 @@ func BenchmarkDefer(b *testing.B) {
 func BenchmarkDeferNo(b *testing.B) {
 	m := generateIntSlice(b)
 	for n := 0; n < b.N; n++ {
-		for i := 0; i < len(m); i++ {
+		for i := range m {
 			var item = m[i]
 			checkDeferNo(b, i, item)
 		}

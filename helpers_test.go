@@ -12,7 +12,7 @@ const (
 
 func generateIntSlice(b *testing.B) []int {
 	var m = make([]int, BenchMarkSize)
-	for i := 0; i < BenchMarkSize; i++ {
+	for i := range BenchMarkSize {
 		m[i] = i
 	}
 	b.ResetTimer()
@@ -21,7 +21,7 @@ func generateIntSlice(b *testing.B) []int {
 
 func generateUnsafePointerSlice(b *testing.B) [BenchMarkSize]unsafe.Pointer {
 	var m [BenchMarkSize]unsafe.Pointer
-	for i := 0; i < BenchMarkSize; i++ {
+	for i := range BenchMarkSize {
 		e := i
 		m[i] = unsafe.Pointer(&e)
 	}
@@ -29,9 +29,9 @@ func generateUnsafePointerSlice(b *testing.B) [BenchMarkSize]unsafe.Pointer {
 	return m
 }
 
-func generateInterfaceSlice(b *testing.B) [BenchMarkSize]interface{} {
-	var m [BenchMarkSize]interface{}
-	for i := 0; i < BenchMarkSize; i++ {
+func generateInterfaceSlice(b *testing.B) [BenchMarkSize]any {
+	var m [BenchMarkSize]any
+	for i := range BenchMarkSize {
 		m[i] = i
 	}
 	b.ResetTimer()
